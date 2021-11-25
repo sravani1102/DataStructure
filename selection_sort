@@ -1,0 +1,33 @@
+//selection sort
+#include<stdio.h>
+void selection_sort(int [],int);
+void main()
+{
+    int a[20],n,i;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    selection_sort(a,n);
+}
+void selection_sort(int a[],int n)
+{
+    int minpos,i,j,temp;
+    for(i=0;i<n;i++)
+    {
+        minpos=i;
+        for(j=i+1;j<n;j++)
+        {
+            if(a[minpos]>a[j])
+            {
+                minpos=j;
+            }
+            temp=a[i];
+            a[i]=a[minpos];
+            a[minpos]=temp;
+        }
+    }
+    for(i=0;i<n;i++)
+        printf("%d ",a[i]);
+}
