@@ -1,0 +1,103 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct polynomial
+{
+    int highpower;
+    int coeff[50];
+};
+typedef struct polynomial poly;
+poly *create()
+{
+    poly *p;
+    p=(poly *)malloc(sizeof(poly));
+    printf("enter highest power in the polynomial\n");
+    scanf("%d",&p->highpower);
+    for(int i=p->highpower;i>=0;i--)
+    {
+        printf("enter coeffecient of %d\n",i);
+        scanf("%d",&p->coeff[i]);
+    }
+    return p;
+}
+void display(poly *p)
+{
+    for(int i=p->highpower;i>=0;i--)
+    {
+        printf("%dx^%d+",p->coeff[i],i);
+    }
+    printf("\n");
+}
+int max(int a,int b)
+{
+    return(a>b?a:b);
+}
+poly *add(poly *p1,poly *p2)
+{
+    poly *p3;
+    p3=(poly *)malloc(sizeof(poly));
+    p3->highpower=max(p1->highpower,p2->highpower);
+    printf("%d\n",p3->highpower);
+    for(int i=p3->highpower;i>=0;i--)
+    {
+        p3->coeff[i]=p1->coeff[i]+p2->coeff[i];
+    }
+    return p3;
+}
+poly *sub(poly *p1,poly *p2)
+{
+    poly *p3;
+    p3=(poly *)malloc(sizeof(poly));
+    p3->highpower=max(p1->highpower,p2->highpower);
+    printf("%d\n",p3->highpower);
+    for(int i=p3->highpower;i>=0;i--)
+    {
+        p3->coeff[i]=p1->coeff[i]-p2->coeff[i];
+    }
+    return p3;
+}
+poly *mul(poly *p1,poly *p2)
+{
+    poly *p3;
+    p3=(poly *)malloc(sizeof(poly));
+    p3->highpower=p1->highpower+p2->highpower;
+    for(int i=p1->highpower;i>=0;i--)
+    {
+        for(int j=p2->highpower;j>=0;j--)
+        {
+            p3->coeff[i+j]=p3->coeff[i+j]+(p1->coeff[i]*p2->coeff[j]);
+        }
+    }
+    return p3;
+}
+int main()
+{
+    poly *p,*p1,*p2,*p3;
+    p1=create();
+    display(p1);
+    p2=create();
+    display(p2);
+    printf("Menu Driven\n1.Addition\n2.Subtraction\n3.Multiplication\n4.Exit\n");
+    int ch;
+    while(1)
+    {
+        printf("enter your choice:\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:p3=add(p1,p2);
+                   display(p3);
+                   break;
+            case 2:p3=sub(p1,p2);
+                   display(p3);
+                   break;
+            case 3:p3=mul(p1,p2);
+                   display(p3);
+                   break;
+            case 4:exit(0);
+                   break;
+            default:printf("enter valid choice\n");
+
+        }
+    }
+    
+}
