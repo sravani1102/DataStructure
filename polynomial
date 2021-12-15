@@ -73,8 +73,8 @@ int main()
 {
     poly *p,*p1,*p2,*p3;
     p1=create();
-    display(p1);
     p2=create();
+    display(p1);
     display(p2);
     printf("Menu Driven\n1.Addition\n2.Subtraction\n3.Multiplication\n4.Exit\n");
     int ch;
