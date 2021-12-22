@@ -163,9 +163,9 @@ node *sub(node *p1,node *p2)
         }
         if(p2==NULL)
         {
-                new=(node *)malloc(sizeof(node));
                 while(p1!=NULL)
                 {
+                        new=(node *)malloc(sizeof(node));
                         new->exp=p1->exp;
                         new->coeff=p1->coeff;
                         p3=addterm(p3,new);
