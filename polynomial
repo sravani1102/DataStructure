@@ -36,7 +36,6 @@ poly *add(poly *p1,poly *p2)
     poly *p3;
     p3=(poly *)malloc(sizeof(poly));
     p3->highpower=max(p1->highpower,p2->highpower);
-    printf("%d\n",p3->highpower);
     for(int i=p3->highpower;i>=0;i--)
     {
         p3->coeff[i]=p1->coeff[i]+p2->coeff[i];
@@ -48,7 +47,6 @@ poly *sub(poly *p1,poly *p2)
     poly *p3;
     p3=(poly *)malloc(sizeof(poly));
     p3->highpower=max(p1->highpower,p2->highpower);
-    printf("%d\n",p3->highpower);
     for(int i=p3->highpower;i>=0;i--)
     {
         p3->coeff[i]=p1->coeff[i]-p2->coeff[i];
@@ -72,9 +70,13 @@ poly *mul(poly *p1,poly *p2)
 int main()
 {
     poly *p,*p1,*p2,*p3;
+    printf("Enter first polynomial:\n");
     p1=create();
+    printf("Enter second polynomial:\n");
     p2=create();
+    printf("Displaying first polynomial:\n");
     display(p1);
+    printf("Displaying second polynomial:\n");
     display(p2);
     printf("Menu Driven\n1.Addition\n2.Subtraction\n3.Multiplication\n4.Exit\n");
     int ch;
@@ -85,17 +87,20 @@ int main()
         switch(ch)
         {
             case 1:p3=add(p1,p2);
+                   printf("Addition of two polynomials:\n");
                    display(p3);
                    break;
             case 2:p3=sub(p1,p2);
+                   printf("Subtraction of two polynomials:\n");
                    display(p3);
                    break;
             case 3:p3=mul(p1,p2);
+                   printf("Multiplication of two polynomials:\n");
                    display(p3);
                    break;
             case 4:exit(0);
                    break;
-            default:printf("enter valid choice\n");
+            default:printf("check choice you enter\n");
 
         }
     }
