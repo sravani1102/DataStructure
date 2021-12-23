@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct slist
+{
+        int data;
+        struct slist *next;
+};
+typedef struct slist node;
+node *create(node *first)
+{
+        node *new,*prev;
+        int x;
+        printf("Enter a value(enter -1 to stop):\n");
+        scanf("%d",&x);
+        while(x!=-1)
+        {
+                new=(node *)malloc(sizeof(node));
+                new->data=x;
+                new->next=NULL;
+                if(first==NULL)
+                {
+                        first=new;
+                        prev=new;
+                }
+                else
+                {
+                        prev->next=new;
+                        prev=new;
+                }
+                printf("enter a value(enter -1 to stop):\n");
+                scanf("%d",&x);
+        }
+        return first;
+}
+node *conc(node *f1,node *f2)
+{
+        node *temp;
+        if(f1==NULL)
+        {
+                f1=f2;
+        }
+        else
+        {
+                temp=f1;
+                while(temp->next!=NULL)
+                {
+                        temp=temp->next;
+                }
+                temp->next=f2;
+        }
+        return f1;
+}
+void display(node *first)
+{
+        node *temp=first;
+        while(temp!=NULL)
+        {
+                printf("%d->",temp->data);
+                temp=temp->next;
+        }
+        printf("NULL\n");
+}
+void main()
+{
+        node *f1=NULL,*f2=NULL,*f3;
+        printf("Enter first list:\n");
+        f1=create(f1);
+        printf("Enter second list:\n");
+        f2=create(f2);
+        printf("First list:\n");
+        display(f1);
+        printf("Second list:\n");
+        display(f2);
+        f3=conc(f1,f2);
+        printf("Concatenation of two lists:\n");
+        display(f3);
+}
