@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct slist
+{
+    int data;
+    struct slist *next;
+};
+typedef struct slist node;
+node *create(node *first)
+{
+    node *new,*prev;
+    int x;
+    printf("Enter a value(enter -1 to stop)\n");
+    scanf("%d",&x);
+    while(x!=-1)
+    {
+        new=(node *)malloc(sizeof(node));
+        new->data=x;
+        new->next=NULL;
+        if(first==NULL)
+        {
+            first=new;
+            prev=new;
+        }
+        else
+        {
+            prev->next=new;
+            prev=new;
+        }
+        printf("Enter a value(enter -1 to stop)\n");
+        scanf("%d",&x);
+    }
+    prev->next=first;
+    return first;
+}
+int count(node *first)
+{
+    node *temp=first;
+    int c=0;
+    do
+    {
+        c++;
+        temp=temp->next;
+    }while(temp!=first);
+    return c;
+}
+node *insert_at_begin(node *first,int x)
+{
+    node *temp,*new;
+    new=(node *)malloc(sizeof(node));
+    new->data=x;
+    new->next=NULL;
+    if(first==NULL)
+    {
+        first=new;
+    }
+    else
+    {
+        do
+        {
+            temp=temp->next;
+        }while(temp->next!=first);
+        new->next=first;
+        first=new;
+        temp->next=first;
+    }
+    return first;
+}
+void display(node *first)
+{
+    node *temp;
+    if(first==NULL)
+    {
+        printf("No list found\n");
+    }
+    else
+    {
+        temp=first;
+        do
+        {
+            printf("%d->",temp->data);
+            temp=temp->next;
+        }while(temp!=first);
+        printf("%d\n",temp->data);
+    }
+}
+void main()
+{
+    node *head=NULL;
+    head=create(head);
+    display(head);
+}
