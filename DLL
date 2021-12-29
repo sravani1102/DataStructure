@@ -1,0 +1,187 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct slist
+{
+    int data;
+    struct slist *left,*right;
+};
+typedef struct slist node;
+node *create(node *first)
+{
+    node *new,*prev;
+    int x;
+    printf("Enter a value(enter -1 to stop)\n");
+    scanf("%d",&x);
+    while(x!=-1)
+    {
+        new=(node *)malloc(sizeof(node));
+        new->data=x;
+        new->left=NULL;
+        new->right=NULL;
+        if(first==NULL)
+        {
+            first=new;
+            prev=new;
+        }
+        else
+        {
+            prev->right=new;
+            new->left=prev;
+            prev=new;
+        }
+        printf("Enter a value(enter -1 to stop)\n");
+        scanf("%d",&x);
+    }
+    return first;
+}
+void display(node *first)
+{
+    node *temp;
+    if(first==NULL)
+    {
+        printf("No list is found\n");
+    }
+    else
+    {
+        temp=first;
+        printf("NULL<->");
+        while(temp!=NULL)
+        {
+            printf("%d<->",temp->data);
+            temp=temp->right;
+        }
+        printf("NULL\n");
+    }
+}
+int count(node *first)
+{
+    int c=0;
+    node *temp=first;
+    while(temp!=NULL)
+    {
+        c++;
+        temp=temp->right;
+    }
+    return c;
+}
+void search(node *first,int x)
+{
+    node *temp=first;
+    int flag=0;
+    while(temp!=NULL)
+    {
+        if(temp->data==x)
+        {
+            flag=1;
+            break;
+        }
+        temp=temp->right;
+    }
+    if(flag==1)
+    {
+        printf("%d element is found in Doubly linked list\n",x);
+    }
+    else
+    {
+        printf("%d element is not found in Doubly linked list\n",x);
+    }
+}
+node *insert_at_begin(node *first,int x)
+{
+    node *new;
+    new=(node *)malloc(sizeof(node));
+    new->data=x;
+    new->left=NULL;
+    new->right=NULL;
+    if(first==NULL)
+    {
+        first=new;
+    }
+    else
+    {
+        new->right=first;
+        first->left=new;
+        first=new;
+    } 
+    return first;
+}
+node *insert_at_end(node *first,int x)
+{
+    node *new,*temp;
+    new=(node *)malloc(sizeof(node));
+    new->data=x;
+    new->left=NULL;
+    new->right=NULL;
+    if(first==NULL)
+    {
+        first=new;
+    }
+    else
+    {
+        temp=first;
+        while(temp->right!=NULL)
+        {
+            temp=temp->right;
+        }
+        temp->right=new;
+        new->left=temp;
+    }
+    return first;
+}
+node *insert_at_pos(node *first,int x,int pos)
+{
+    node *temp=first,*new;
+    new=(node *)malloc(sizeof(node));
+    new->data=x;
+    new->right=NULL;
+    new->left=NULL;
+    for(int i=0;i<pos-1;i++)
+    {
+        temp=temp->right;
+    }
+    
+}
+void main()
+{
+    node *head;
+    int x,pos,ch;
+    printf("Menu Driven\n1.Create\n2.Display\n3.Count\n4.Search\n5.Insert at beginning\n6.Insert at Ending\n7.Insert at position\n8.Delete\n9.Sort\n10.Reverse\n11.Exit\n");
+    while(1)
+    {
+        printf("Enter your choice:\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:head=NULL;
+                   head=create(head);
+                   break;
+            case 2:display(head);
+                   break;
+            case 3:x=count(head);
+                   printf("The number of nodes in Doubly linked list : %d\n",x);
+                   break;
+            case 4:printf("Enter a value to Search:\n");
+                   scanf("%d",&x);
+                   search(head,x);
+                   break;
+            case 5:printf("Enter a value to Insert at Beginning\n");
+                   scanf("%d",&x);
+                   head=insert_at_begin(head,x);
+                   break;
+            case 6:printf("Enter a value to Insert at Ending\n");
+                   scanf("%d",&x);
+                   head=insert_at_end(head,x);
+                   break;
+            case 7:printf("Enter a value to insert at position:\n");
+                   scanf("%d",&x);
+                   printf("Enter postion to insert a value:\n");
+                   scanf("%d",&pos);
+                   head=insert_at_pos(head,x,pos);
+                   break;
+            case 11:printf("While loop is terminated\n");
+                    exit(0);
+                    break;
+            default:printf("Check your choice");
+        }
+    }
+}
