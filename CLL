@@ -177,7 +177,32 @@ node *delete(node *first,int x)
 }
 node *reverse(node *first)
 {
-       
+    node *temp1,*temp,*new;
+    temp=NULL;
+    temp1=first;
+    do
+    {
+        new=(node *)malloc(sizeof(node));
+        new->data=temp1->data;
+        new->next=NULL;
+        if(temp==NULL)
+        {
+            temp=new;
+        }
+        else
+        {
+            new->next=temp;
+            temp=new;
+        }
+        temp1=temp1->next;
+    }while(temp1!=first);
+    first=temp;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=first;
+    return first;
 }
 void display(node *first)
 {
