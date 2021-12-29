@@ -1,23 +1,12 @@
 //insertion sort
 #include<stdio.h>
-void insertion_sort(int [],int);
-void main()
+void insertionSort(int a[],int n)
 {
-    int a[20],n,i;
-    scanf("%d",&n);
-    for(i=0;i<n;i++)
+    int temp,j;
+    for(int i=1;i<n;i++)
     {
-        scanf("%d",&a[i]);
-    }
-    insertion_sort(a,n);
-}
-void insertion_sort(int a[],int n)
-{
-    int i,j,temp;
-    for(i=1;i<n;i++)
-    {
-        j=i;
         temp=a[i];
+        j=i;
         while(j>0 && temp<a[j-1])
         {
             a[j]=a[j-1];
@@ -25,6 +14,22 @@ void insertion_sort(int a[],int n)
         }
         a[j]=temp;
     }
-    for(i=0;i<n;i++)
+    printf("After Sorting using insertion Sort\n");
+    for(int i=0;i<n;i++)
+    {
         printf("%d ",a[i]);
+    }
+}
+void main()
+{
+    int n;
+    printf("Enter size of the array:\n");
+    scanf("%d",&n);
+    int a[n];
+    printf("Enter elements into array\n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    insertionSort(a,n);
 }
