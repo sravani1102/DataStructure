@@ -139,7 +139,96 @@ node *insert_at_pos(node *first,int x,int pos)
     {
         temp=temp->right;
     }
-    
+    new->right=temp->right;
+    temp->right=new;
+    temp->right->left=new;
+    new->left=temp;
+    return first; 
+}
+node *delete(node *first,int x)
+{
+    node *temp1,*temp;
+    int flag=0;
+    if(first->data==x)
+    {
+        first=first->right;
+        first->left=NULL;
+    }
+    else
+    {
+        temp1=first;
+        temp=first->right;
+        while(temp!=NULL)
+        {
+            if(temp->data==x)
+            {
+                flag=1;
+                break;
+            }
+            temp1=temp;
+            temp=temp->right;
+        }
+        if(flag==1)
+        {
+            if(temp->right==NULL)
+            {
+                temp1->right=NULL;
+            }
+            else
+            {
+                temp1->right=temp->right;
+                temp->right->left=temp1;
+            }
+        }
+        else
+        {
+            printf("Element is not found\n");
+        }
+    }
+    return first;
+}
+node *sort(node *first)
+{
+    node *temp,*temp1;
+    int t;
+    for(temp=first;temp->right!=NULL;temp=temp->right)
+    {
+        for(temp1=temp->right;temp1!=NULL;temp1=temp1->right)
+        {
+            if(temp->data>temp1->data)
+            {
+                t=temp->data;
+                temp->data=temp1->data;
+                temp1->data=t;
+            }
+        }
+    }
+    return first;
+}
+node *reverse(node *first)
+{
+    node *temp1,*temp,*new;
+    temp=NULL;
+    temp1=first;
+    while(temp!=NULL)
+    {
+        new=(node *)malloc(sizeof(node));
+        new->data=temp1->data;
+        new->right=NULL;
+        new->left=NULL;
+        if(temp==NULL)
+        {
+            temp=new;
+        }
+        else
+        {
+            new->right=temp;
+            temp->left=new;
+            temp=new;
+        }
+        temp1=temp1->right;
+    }
+    return first;
 }
 void main()
 {
@@ -177,6 +266,12 @@ void main()
                    printf("Enter postion to insert a value:\n");
                    scanf("%d",&pos);
                    head=insert_at_pos(head,x,pos);
+                   break;
+            case 8:printf("Enter a value to delete:\n");
+                   scanf("%d",&x);
+                   head=delete(head,x);
+                   break;
+            case 9:head=sort(head);
                    break;
             case 11:printf("While loop is terminated\n");
                     exit(0);
