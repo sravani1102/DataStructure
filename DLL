@@ -173,11 +173,13 @@ node *delete(node *first,int x)
             if(temp->right==NULL)
             {
                 temp1->right=NULL;
+                free(temp);
             }
             else
             {
                 temp1->right=temp->right;
                 temp->right->left=temp1;
+                free(temp);
             }
         }
         else
@@ -210,7 +212,7 @@ node *reverse(node *first)
     node *temp1,*temp,*new;
     temp=NULL;
     temp1=first;
-    while(temp!=NULL)
+    while(temp1!=NULL)
     {
         new=(node *)malloc(sizeof(node));
         new->data=temp1->data;
@@ -228,7 +230,7 @@ node *reverse(node *first)
         }
         temp1=temp1->right;
     }
-    return first;
+    return temp;
 }
 void main()
 {
@@ -273,6 +275,8 @@ void main()
                    break;
             case 9:head=sort(head);
                    break;
+            case 10:head=reverse(head);
+                    break;
             case 11:printf("While loop is terminated\n");
                     exit(0);
                     break;
