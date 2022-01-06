@@ -1,11 +1,11 @@
 #include<stdio.h>                                                                                      
 #include<stdlib.h>                                                                                     
-struct slist                                                                                           
+struct hashtable                                                                                           
 { 
 	int data;                                                                                              
-  struct slist *next;                                                                            
+  struct hashtable *next;                                                                            
 };                                                                                                     
-typedef struct slist node;                                                                             
+typedef struct hashtable node;                                                                             
 int hash(int x)                                                                                        
 {                                                                                                      	
   return x%10;                                                                                   
@@ -61,9 +61,9 @@ void delete(node *t[10],int x)
 {
 	int h=hash(x),flag=0;
 	node *temp=t[h]->next,*temp1;
-	if(t[h]==NULL)
+	if(t[h]->next==NULL)
 	{
-		printf("No list is found");
+		printf("No list is found\n");
 	}
 	else if(temp->data==x)
 	{
@@ -96,6 +96,10 @@ void delete(node *t[10],int x)
 				free(temp);
 			} 
 		}
+		else
+		{
+		    printf("%d element is not found to delete\n");
+		}
 	}
 }           
 void display(node *t[10])                                                                              
@@ -116,7 +120,12 @@ void display(node *t[10])
 void main()                                                                                            
 {                                                                                                              
   node *t[10];                                                                                           
-  int ch,x;                                                                                              
+  int ch,x;
+  for(int i=0;i<10;i++)
+  {
+      t[i]=(node *)malloc(sizeof(node));
+      t[i]->next=NULL;
+  }
   printf("Menu Driven\n1.Insert\n2.Search\n4.Delete\n5.Display\n6.Exit\n");                              
   while(1)                                                                                               
   {                                                                                             		
