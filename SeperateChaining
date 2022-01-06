@@ -1,0 +1,146 @@
+#include<stdio.h>                                                                                      
+#include<stdlib.h>                                                                                     
+struct slist                                                                                           
+{ 
+	int data;                                                                                              
+  struct slist *next;                                                                            
+};                                                                                                     
+typedef struct slist node;                                                                             
+int hash(int x)                                                                                        
+{                                                                                                      	
+  return x%10;                                                                                   
+}                                                                                                      
+void *insert(node *t[10],int x)                                                                        
+{                                                                                                      	
+  int h=hash(x);                                                                                         
+  node *new;                                                                                             
+  new=(node *)malloc(sizeof(node));                                                                      
+  new->data=x;                                                                                          
+  new->next=NULL;                                                                                        
+  if(t[h]==NULL)                                                                                         
+  {                                                                                              		
+    t[h]->next=new;                                                                                
+  }                                                                                                      
+  else                                                                                                   
+  {                                                                                                              
+    new->next=t[h]->next;                                                                                 
+    t[h]->next=new;                                                                                 
+  }                                                                                             
+}     
+void search(node *t[10],int x)
+{
+	int h=hash(x),flag=0;
+	node *temp;
+	if(t[h]->next==NULL)
+	{
+		printf("%d element is not found\n",x);
+	}
+	else
+	{
+		temp=t[h]->next;
+		while(temp!=NULL)
+		{
+			if(temp->data==x)
+			{
+				flag=1;
+				break;
+			}
+			temp=temp->next;
+		}
+		if(flag==1)
+		{
+			printf("%d element is found\n",x);
+		}
+		else
+		{
+			printf("%d element is not found\n",x);
+		}
+	}
+}       
+void delete(node *t[10],int x)
+{
+	int h=hash(x),flag=0;
+	node *temp=t[h]->next,*temp1;
+	if(t[h]==NULL)
+	{
+		printf("No list is found");
+	}
+	else if(temp->data==x)
+	{
+		t[h]->next=temp->next;
+	}
+	else
+	{
+		temp=temp->next;
+		temp1=t[h]->next;
+		while(temp!=NULL)
+		{
+			if(temp->data==x)
+			{
+				flag=1;
+				break;
+			}
+			temp1=temp;
+			temp=temp->next;
+		}
+		if(flag==1)
+		{
+			if(temp->next==NULL)
+			{
+				temp1->next=NULL;
+				free(temp);
+			}
+			else
+			{
+				temp1->next=temp->next;
+				free(temp);
+			} 
+		}
+	}
+}           
+void display(node *t[10])                                                                              
+{                                                                                                      	
+  node *temp;                                                                                            
+  for(int i=0;i<10;i++)                                                                                  
+  {                                                                                              		
+    temp=t[i]->next;                                                                                       
+    printf("%d<->",i);                                                                                     
+    while(temp!=NULL)                                                                                      
+    {                                                                                                               
+      printf("%d->",temp->data);                                                                             
+      temp=temp->next;                                                                              
+    }                                                                                                      
+    printf("NULL\n");                                                                              
+  }                                                                                            
+}                                                                                                     
+void main()                                                                                            
+{                                                                                                              
+  node *t[10];                                                                                           
+  int ch,x;                                                                                              
+  printf("Menu Driven\n1.Insert\n2.Search\n4.Delete\n5.Display\n6.Exit\n");                              
+  while(1)                                                                                               
+  {                                                                                             		
+    printf("Enter your choice:\n");                                                                        
+    scanf("%d",&ch);                                                                                       
+    switch(ch)                                                                                             
+    {                                                                                                                
+      case 1:printf("Enter an element to insert:");
+             scanf("%d",&x);                                                                                        
+             insert(t,x);                                                                                          
+             break;                                                                                          
+      case 2:printf("Enter an element to search:");
+				     scanf("%d",&x);
+				     search(t,x);
+				     break;
+		  case 3:printf("Enter an element to delete:");
+				    scanf("%d",&x);
+				    delete(t,x);
+				    break;
+			case 4:display(t);                                                                                            
+             break;                                                                                          
+      case 5:printf("While is terminated\n");                                                                       
+             exit(0);                                                                                               
+             break;                                                                                          
+      default:printf("Check your choice\n");                                                      
+  }                                                                                              }                                                                                            
+}   
