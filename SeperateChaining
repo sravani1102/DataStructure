@@ -147,7 +147,7 @@ void main()
 				    break;
 			case 4:display(t);                                                                                            
              break;                                                                                          
-      case 5:printf("While is terminated\n");                                                                       
+      case 5:printf("While loop is terminated\n");                                                                       
              exit(0);                                                                                               
              break;                                                                                          
       default:printf("Check your choice\n");                                                      
