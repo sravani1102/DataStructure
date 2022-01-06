@@ -142,5 +142,6 @@ void main()
              exit(0);                                                                                               
              break;                                                                                          
       default:printf("Check your choice\n");                                                      
-  }                                                                                              }                                                                                            
+    }                                                                                           
+  }                                                                                            
 }   
