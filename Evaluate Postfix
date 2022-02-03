@@ -6,14 +6,7 @@ int a[MAX];
 int top=-1;
 void push(int x)
 {
-        if(top==MAX-1)
-        {
-                printf("Stack Over Flow");
-        }
-        else
-        {
-                a[++top]=x;
-        }
+        a[++top]=x;
 }
 int pop()
 {
