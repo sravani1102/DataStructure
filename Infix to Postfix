@@ -5,14 +5,7 @@ char postfix[MAX],a[MAX];
 int top=-1,j=0;
 void push(char ch)
 {
-        if(top==MAX-1)
-        {
-                printf("Stack Over Flow\n");
-        }
-        else
-        {
-                a[++top]=ch;
-        }
+        a[++top]=ch;
 }
 char pop()
 {
