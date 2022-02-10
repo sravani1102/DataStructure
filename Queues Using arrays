@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 10
+int a[MAX];
+int f=-1,r=-1;
+void enque(int x)
+{
+        if(f==-1)                                                   //if(x==MAX-1)
+        {                                                               printf("Queue Over flow\n");
+                f=0;                                                  else
+                r=0;                                                    if(f==-1)
+                a[r]=x;                                                 {
+        }                                                                    f=r=0;
+        else                                                                 a[r]=x;
+        {                                                               }
+                if(r==MAX-1)                                            else
+                        printf("Queue OverFlow\n");                          a[++r]=x;
+                else
+                        a[++r]=x;
+        }
+}
+int deque()
+{
+        if(f==-1)
+                return -1;
+        else if(f==r)
+        {
+                int x=a[f];
+                f=r=-1;
+                return x;
+        }
+        else
+                return a[f++];
+}
+void display()
+{
+        if(f==-1)
+                printf("Queue not found\n");
+        else
+        {
+                printf("Queue:\n");
+                for(int i=f;i<=r;i++)
+                        printf("%d\n",a[i]);
+        }
+}
+void main()
+{
+        int ch,x;
+        printf("Menu Driven\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit\n");
+        while(1)
+        {
+                printf("Enter your choice:\n");
+                scanf("%d",&ch);
+                switch(ch)
+                {
+                        case 1:printf("Enter a value to enque an element in queue\n");
+                               scanf("%d",&x);
+                               enque(x);
+                               break;
+                        case 2:x=deque();
+                               if(x==-1)
+                                       printf("Queue Under Flow\n");
+                               else
+                                       printf("Deque element is %d\n",x);
+                               break;
+                        case 3:display();
+                               break;
+                        case 4:printf("While loop is terminated\n");
+                               exit(0);
+                               break;
+                        default:printf("Check your choice\n");
+                }
+        }
+}
