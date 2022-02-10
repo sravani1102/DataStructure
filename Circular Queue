@@ -46,7 +46,7 @@ void display()
         else
         {
                 printf("Circular Queue:\n");
-                if(f<r)
+                if(f<=r)
                 {
                         for(int i=f;i<=r;i++)
                                 printf("%d\t",a[i]);
