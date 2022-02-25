@@ -126,7 +126,7 @@ void main()
       t[i]=(node *)malloc(sizeof(node));
       t[i]->next=NULL;
   }
-  printf("Menu Driven\n1.Insert\n2.Search\n4.Delete\n5.Display\n6.Exit\n");                              
+  printf("Menu Driven\n1.Insert\n2.Search\n3.Delete\n4.Display\n5.Exit\n");                              
   while(1)                                                                                               
   {                                                                                             		
     printf("Enter your choice:\n");                                                                        
@@ -138,14 +138,15 @@ void main()
              insert(t,x);                                                                                          
              break;                                                                                          
       case 2:printf("Enter an element to search:");
-				     scanf("%d",&x);
-				     search(t,x);
-				     break;
-		  case 3:printf("Enter an element to delete:");
-				    scanf("%d",&x);
-				    delete(t,x);
-				    break;
-			case 4:display(t);                                                                                            
+	     scanf("%d",&x);
+	     search(t,x);
+	     break;
+     case 3:printf("Enter an element to delete:");
+	    scanf("%d",&x);
+	    delete(t,x);
+	    break;
+      case 4:printf("Hash Table using Seperate Chaining\n");	
+	     display(t);                                                                                            
              break;                                                                                          
       case 5:printf("While loop is terminated\n");                                                                       
              exit(0);                                                                                               
