@@ -132,7 +132,14 @@ void main()
                                scanf("%d",&x);
                                p=insert(p,x);
                                break;
-                        case 2:inorder(p);
+                        case 2:if(p==NULL)
+			       {
+			           printf("Tree not found");
+			       }
+			       else
+			       {
+			       	   inorder(p);
+			       }
                                printf("\n");
                                break;
                         case 3:preorder(p);
