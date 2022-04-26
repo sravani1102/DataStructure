@@ -1,0 +1,44 @@
+#include<stdio.h>
+#define MAX 50
+int graph[MAX][MAX];
+int n;
+int in[MAX],out[MAX];
+void inout()
+{
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+            if(graph[i][j]==1)
+            {
+                out[i]++;
+                in[j]++;
+            }
+        }
+    }
+}
+void main()
+{
+    printf("Enter number of nodes in a graphs\n");
+    scanf("%d",&n);
+    printf("Enter adjacency matrix\n");
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+            scanf("%d",&graph[i][j]);
+        }
+    }
+    for(int i=1;i<=n;i++)
+    {
+        in[i]=0;
+        out[i]=0;
+    }
+    inout();
+    for(int i=1;i<=n;i++)
+    {
+        printf("%d : ",i);
+        printf("Indegree = %d  ",in[i]);
+        printf("Outdegree = %d\n",out[i]);
+    }
+}
